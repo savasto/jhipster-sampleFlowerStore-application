@@ -1,0 +1,98 @@
+entity Customer{
+    id String
+	name String
+    loginStatus String
+    age Integer
+    active Boolean
+    address String
+	email String
+    password String
+    initDate String
+}
+
+entity Product {
+    id String
+	title String
+    inStock Boolean
+    price Double
+    color String
+    description String
+    size Integer
+    category Category
+}
+entity Category {
+    id String
+	categoryName String
+    categoryDescription String
+}
+
+entity Bouquet {
+	id String
+    name String
+    createdAt Date
+    product Product
+}
+
+entity Cart {
+	id String
+    createdAt String
+    status String
+    paymentMethod String
+    deliveryMethod String
+    totalCartPrice Double
+    customer Customer
+}
+
+entity Order {
+	id String
+    createdAt String
+    deliveryName String
+    deliveryStreet String
+    deliveryCity String
+    deliveryZip String
+    totalPrice Double
+    ccNumber String
+    ccExpiration String
+    ccCVV Integer
+    customer Customer
+}
+
+entity OrderItem{
+id String
+quantity Integer
+unitSalePrice Double
+createdAt String
+subtotalPrice Double
+}
+
+relationship OneToMany{
+Order to OrderItem
+}
+relationship OneToOne{
+OrderItem{product} to Product
+}
+relationship OneToMany{
+Customer to Order{customer}
+}
+relationship ManyToMany {
+Cart{product(title)}to Product{cart}
+}
+relationship OneToOne{
+Cart{customer} to Customer
+}
+relationship OneToMany{
+Category to Product{category}
+}
+relationship OneToMany{
+Bouquet to Product
+}
+
+
+
+
+
+
+
+
+
+
